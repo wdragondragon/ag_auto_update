@@ -14,6 +14,7 @@ if __name__ == "__main__":
     print(f'发现需要更新文件:{files_to_upload}')
     upload_files(files_to_upload)
     if len(files_to_upload) > 0:
+        print("刷新文件列表...")
         response = requests.get('http://1.15.138.227:8123/refresh_files')
         print(response.text)
     print("Press any key to exit...")

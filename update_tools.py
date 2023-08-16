@@ -50,14 +50,21 @@ def check_local_hash(local_dir):
 
 
 def upload_files(files_to_upload):
-    for local_file_path, remote_file_path in files_to_upload.items():
-        with open(local_file_path, 'rb') as f:
-            files = {'file': (remote_file_path, f)}
-            response = requests.post('http://1.15.138.227:8123/upload', files=files)
-            if response.status_code == 200:
-                print(f'Successfully uploaded {local_file_path} to {remote_file_path}')
-            else:
-                print(f'Failed to upload {local_file_path} to {remote_file_path}')
+    try:
+        with tqdm(files_to_upload.items(), desc='Uploading files', total=len(files_to_upload), unit='file') as t:
+            for local_file_path, remote_file_path in t:
+                # tqdm.write(f'Uploading {local_file_path} to {remote_file_path}')
+                with open(local_file_path, 'rb') as f:
+                    files = {'file': (remote_file_path, f)}
+                    response = requests.post('http://1.15.138.227:8123/upload', files=files)
+                    if response.status_code == 200:
+                        tqdm.write(f'Successfully uploaded {local_file_path} to {remote_file_path}')
+                    else:
+                        tqdm.write(f'Failed to upload {local_file_path} to {remote_file_path}')
+    except KeyboardInterrupt:
+        t.close()
+        raise
+    t.close()
 
 
 def download_files(files_to_download):
