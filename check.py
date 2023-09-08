@@ -20,7 +20,7 @@ class FileHashUtil:
         file_hashes = {}
         for root, dirs, files in os.walk(directory):
             for file in files:
-                if file in ['client_update.exe', 'server_update.exe']:
+                if file in ['client_update.exe', 'server_update.exe', 'global_config.json']:
                     continue
                 file_path = os.path.join(root, file)
                 file_hash = FileHashUtil.calculate_hash(file_path)
