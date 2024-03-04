@@ -1,7 +1,5 @@
 # 获取服务器的file_path和hash
 import os
-import time
-from urllib.parse import quote
 
 import requests
 from tqdm import tqdm
@@ -40,7 +38,9 @@ def check_local_hash(local_dir):
     for file_path, file_hash in server_hashes.items():
         local_file_path = file_path.replace("./apex_gun", '')
         # 如果服务器的文件在本地不存在，打印出来
-        if local_file_path not in local_hashes and local_file_path != '/config/global_config.json':
+        if local_file_path == '/config/global_config.json':
+            continue
+        if local_file_path not in local_hashes:
             print(f'Not exist in local: {local_file_path}')
             no_match_dict[file_path] = local_dir + local_file_path
         elif local_hashes[local_file_path] != server_hashes[file_path]:

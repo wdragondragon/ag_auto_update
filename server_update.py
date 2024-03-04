@@ -6,7 +6,7 @@ import check_run
 from update_tools import check_remote_hash, upload_files
 
 if __name__ == "__main__":
-    check_run.check()
+    check_run.check('server_update')
     parser = argparse.ArgumentParser()
     parser.add_argument('--local_dir', type=str, default='.', help='dataset.yaml path')
     opt = parser.parse_args()
