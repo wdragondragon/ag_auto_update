@@ -1,9 +1,5 @@
-import os
 import hashlib
-import time
-
-import requests
-import json
+import os
 
 
 class FileHashUtil:
