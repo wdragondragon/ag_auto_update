@@ -3,11 +3,6 @@ import argparse
 from check_run import open_check
 from update_tools import check_local_hash, download_files
 
-if __name__ == "__main__":
-    parser = argparse.ArgumentParser()
-    parser.add_argument('--local_dir', type=str, default='.', help='dataset.yaml path')
-    opt = parser.parse_args()
-
 
 @open_check(val_type="ai")
 def main():
@@ -19,3 +14,10 @@ def main():
     download_files(files_to_download)
     print("Press any key to exit...")
     input()
+
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--local_dir', type=str, default='.', help='dataset.yaml path')
+    opt = parser.parse_args()
+    main()
